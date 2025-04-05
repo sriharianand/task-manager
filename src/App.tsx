@@ -14,10 +14,13 @@ function App() {
   const mode = themeState.mode;
   const theme = mode === 'light' ? lightTheme : darkTheme;
 
+  // Get the base path from the environment or use a default for local development
+  const basename = import.meta.env.BASE_URL || '/';
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
+      <Router basename={basename}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
