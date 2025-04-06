@@ -236,7 +236,7 @@ const TableFilters: React.FC<FilterProps> = ({ tasks, onFilter, columns, handleC
 
       {/* Active Filters Display */}
       {hasActiveFilters() && (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }} role="region" aria-label="Active filters">
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }} role="region" aria-label="Active filters">
           {filters.status && (
             <Chip
               label={`Status: ${formatStatus(filters.status)}`}

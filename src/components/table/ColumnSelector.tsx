@@ -18,7 +18,7 @@ import {
   ViewColumn as ColumnIcon,
 } from '@mui/icons-material';
 import styled from 'styled-components';
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import StyledThemeProvider from '../../theme/StyledThemeProvider';
 
 export interface Column {
@@ -35,18 +35,6 @@ interface ColumnSelectorProps {
 
 const ColumnButton = styled(Button)`
   margin-bottom: 16px;
-`;
-
-const DragList = styled.div`
-  padding: 8px 0;
-`;
-
-const DragItem = styled.div<{ isDragging: boolean }>`
-  padding: 8px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  background-color: ${props => props.isDragging ? props.theme?.palette?.action?.hover || '#f0f0f0' : 'transparent'};
-  box-shadow: ${props => props.isDragging ? '0 2px 8px rgba(0, 0, 0, 0.1)' : 'none'};
 `;
 
 const ColumnSelector: React.FC<ColumnSelectorProps> = ({ columns, onChange }) => {
@@ -131,13 +119,20 @@ const ColumnSelector: React.FC<ColumnSelectorProps> = ({ columns, onChange }) =>
                 >
                   {localColumns.map((column, index) => (
                     <Draggable key={column.id} draggableId={column.id} index={index}>
-                      {(provided) => (
+                      {(provided, snapshot) => (
                         <ListItem
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           divider
                           role="listitem"
                           aria-label={column.label}
+                          sx={{
+                            backgroundColor: snapshot.isDragging ? 'action.hover' : 'transparent',
+                            borderRadius: '4px',
+                            boxShadow: snapshot.isDragging ? '0 2px 8px rgba(0, 0, 0, 0.1)' : 'none',
+                            transition: 'background-color 0.2s, box-shadow 0.2s',
+                            mb: 1
+                          }}
                         >
                           <ListItemIcon
                             {...provided.dragHandleProps}
