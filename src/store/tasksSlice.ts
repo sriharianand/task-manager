@@ -27,7 +27,7 @@ const initialState: TasksState = {
 };
 
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () => {
-  const response = await fetch('https://run.mocky.io/v3/2bc9c30b-8d6b-412c-bbb2-22ddb42b0193');
+  const response = await fetch('https://run.mocky.io/v3/894221d5-fb36-4d0d-85ac-eb8f2e6a3548');
   if (!response.ok) {
     throw new Error('Failed to fetch tasks');
   }
